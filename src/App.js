@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-/*
+
 class ContactList extends React.Component {
   render() {
     const people = this.props.contacts;
@@ -34,4 +34,3 @@ class App extends Component {
 }
 
 export default App;
-*/
