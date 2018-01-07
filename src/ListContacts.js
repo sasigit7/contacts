@@ -184,10 +184,10 @@ ListContacts.propTypes = {
 export default ListContacts;
 */
 //7. CONTROLLED COMPONENTS::
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
+import React, { Component } from "react"
+import PropTypes from "prop-types"
+import escapeRegExp from "escape-string-regexp"
+import sortBy from "sort-by"
 
 class ListContacts extends Component {
   static propTypes = {
@@ -204,34 +204,47 @@ updateQuery = (query) => {
   this.setState({
     query: trimmedQuery
   })
+
+
+clearQuery = () => {
+  this.updateQuery("")
 }
 
 render() {
    const { contacts, onDeleteContact } = this.props
    const { query } = this.state
 
-   let showingContacts;
-   if(query) {
-     const match = new RegExp(escapeRegExp(this.state.query), "i")
-     showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
+   let showingContacts
+   if (query) {
+     const match = new RegExp(escapeRegExp(query), "i")
+     showingContacts = contacts.filter((contact) => match.test(contact.name))
    } else {
-      showingContacts = this.props.contacts
+      showingContacts = contacts
 }
 
-   showingContacts.sort(sortBy("name"))
+showingContacts.sort(sortBy("name"))
 
   return (
     <div className="list-contacts">
-      {JSON.stringify(this.state)}
       <div className="list-contacts-top">
         <input
           className="search-contacts"
           type="text"
           placeholder="Search contacts"
-          value={this.state.query}
+          value={query}
           onChange={(event) => this.updateQuery(event.target.value)}
         />
       </div>
+
+      {showingContacts.length !== contacts.length && (
+        <div className="showing-contacts">
+      <span>Now showing {showingContacts.length} of {contacts.length} total</span>
+        <button onClick={this.clearQuery}>Show all</button>
+        </div>
+      )}
+
+
+
       <ol className="contact-list">
         {showingContacts.map((contact) => (
           <li key={contact.id} className="contact-list-item">
@@ -248,7 +261,7 @@ render() {
             </div>
 
             <button
-              onClick={() => this.props.onDeleteContact(contact)}
+              onClick={() => onDeleteContact(contact)}
               className="contact-remove"
             >
               Remove
@@ -257,8 +270,8 @@ render() {
         ))}
       </ol>
     </div>
-    );
+    )
   }
 }
 
-export default ListContacts;
+export default ListContacts
