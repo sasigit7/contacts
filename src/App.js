@@ -238,3 +238,19 @@ class App extends Component {
 }
 
 export default App;
+/* 7. CONTROLLED COMPONENTS:::::
+->Controlled Components are components which render a form, but the source of
+truth for that form state lives inside of the component state rather than inside
+of the DOM.
+Benefits::->
+a) Instant Input Validation
+b) Conditionally disable/enable buttons
+c) Enforce input formats
+
+
+
+
+
+
+
+*/
