@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 
 // ADD STATE TO A COMPONENT - STATELESS FUNCTIONAL COMPONENTS
+/* CLASS FIELDS::EXAMPLE::::
+class User extends React.Component {
+   constructor(props) {
+   super(props);
+   this.state = {
+     username: 'Shashi'
+   }
+  }
+}
+is equivalent to ...
+class User extends React.Component {
+   state = {
+   username: 'Shashi'
+ }
+}
+@Having state outside the constructor() method means it is a CLASS FIELD.
+IT'S NEW PROPOSAL FOR A CHANGE IN JS AND IT'S NOT SUPPORTED BY JS, BUT THANKS TO
+BABEL'S FANTASTIC POWER'S OF TRANSPILING, WE CAN USE IT.
+
+*/
 function ListContacts (props) {
     return (
       <ol className="contact-list">
@@ -27,7 +47,28 @@ function ListContacts (props) {
     </ol>
     )
 }
+/* IF THE COMPONENT HAS ONLY RENDER METHOD, WE CAN WRITE IT AS A STATELESS
+ FUNCTIONAL COMPONENT LIKE BELOW EXAMPLE...
 
+class Email extends React.Component {
+ render() {
+ return (
+   <div>{this.props.text}</div>
+   );
+ }
+}
+is equivalent to this...PROPS WILL BE PASSED AS AN ARGUMENT TO THE FUNCTION
+AND KEYWORD "THIS" WILL BE REMOVED FROM JSX...
+ function Email (props) = {
+  return (
+  <div>{props.text}</div>
+ )
+}
+is equivalent to this ...using ES6 with an implicit return
+  const Email = (props) = > (
+   <div>{props.text}</div>
+)
+*/
 /* PASS DATA WITH PROPS
 class ListContacts extends Component {
    render() {
