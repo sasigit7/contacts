@@ -2,7 +2,7 @@
  React, { Component } from "react"
 import ListContacts from './ListContacts'
 
-/*
+
 class ContactList extends React.Component {
   render() {
     const people = this.props.contacts;
@@ -40,8 +40,8 @@ const contacts = [
     "avatarURL": "http://localhost:5001/tyler.jpg"
   }
 ]
-*/
-/*
+
+
 class App extends Component {
   render() {
     return (
@@ -124,7 +124,8 @@ This is the reason, why we say, in React, UI is just a function of the state.
  Once the state changes, the UI will change automatically.
 */
 
-// USING setState TO REMOVE CONTACT
+// USING setState TO REMOVE CONTACT::
+/*
 import React, { Component } from "react"
 import ListContacts from './ListContacts'
 
@@ -161,9 +162,70 @@ class App extends Component {
        this.setState({
 
        })
-       */
-   }
 
+   }
+  render() {
+    return (
+      <div>
+        <ListContacts
+          onDeleteContact={this.removeContact}
+          contacts={this.state.contacts} />
+      </div>
+    );
+  }
+}
+
+export default App;
+*/
+
+/* 6. PROPTYPES:::::
+->Runtime type checking for React props and similar objects. You can use
+prop-types to document the intended types of properties passed to components.
+React will check props passed to your components against those definations, and
+warn in development if they don't match.
+Installation::-> npm install --save prop-types
+Importing::-> import Prop-Types from 'prop-types'; //ES6
+Usage::-> PropTypes was originally exposed as part of the React core module,
+and is commonly used with React Components. */
+
+import React, { Component } from "react"
+import ListContacts from './ListContacts'
+
+class App extends Component {
+  state = {
+    contacts: [
+      {
+        id: "ryan",
+        name: "Ryan Florence",
+        email: "ryan@reacttraining.com",
+        avatarURL: "http://localhost:5001/ryan.jpg"
+      },
+      {
+        id: "michael",
+        name: "Michael Jackson",
+        email: "michael@reacttraining.com",
+        avatarURL: "http://localhost:5001/michael.jpg"
+      },
+      {
+        id: "tyler",
+        name: "Tyler McGinnis",
+        email: "tyler@reacttraining.com",
+        avatarURL: "http://localhost:5001/tyler.jpg"
+      }
+    ]
+  };
+   removeContact = (contact) => {
+       // FIRST WAY - REFER ABOVE 2.a
+       this.setState((state) => ({
+           contacts: state.contacts.filter((c) => c.id !== contact.id)
+       }))
+       //SECOND WAY - REFER ABOVE 2.b
+       /*
+       this.setState({
+
+       })
+      */
+   }
   render() {
     return (
       <div>
