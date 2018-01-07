@@ -1,3 +1,4 @@
+/*
 import React, { Component } from 'react';
 
 // ADD STATE TO A COMPONENT - STATELESS FUNCTIONAL COMPONENTS
@@ -20,7 +21,7 @@ class User extends React.Component {
 IT'S NEW PROPOSAL FOR A CHANGE IN JS AND IT'S NOT SUPPORTED BY JS, BUT THANKS TO
 BABEL'S FANTASTIC POWER'S OF TRANSPILING, WE CAN USE IT.
 
-*/
+
 function ListContacts (props) {
     return (
       <ol className="contact-list">
@@ -47,6 +48,7 @@ function ListContacts (props) {
     </ol>
     )
 }
+*/
 /* IF THE COMPONENT HAS ONLY RENDER METHOD, WE CAN WRITE IT AS A STATELESS
  FUNCTIONAL COMPONENT LIKE BELOW EXAMPLE...
 
@@ -99,5 +101,39 @@ class ListContacts extends Component {
      )
    }
 }
+
+export default ListContacts
 */
+
+//5. UPDATE STATE WITH setState
+import React, { Component } from 'react'
+function ListContacts (props) {
+    return (
+      <ol className="contact-list">
+      {props.contacts.map((contact) => (
+         <li key={contact.id} className='contact-list-item'>
+
+           <div className='contact-avatar' style={
+             {
+               backgroundImage: `url(${contact.avatarURL})`
+             }
+           }>
+         </div>
+
+         <div className='contact-details'> 
+            <p>{contact.name}</p>
+            <p>{contact.email}</p>
+         </div>
+
+        <button
+          // use onClick method
+          onClick={() => props.onDeleteContact(contact)}
+          className='contact-remove'>
+          Remove
+        </button>
+         </li>
+      ))}
+    </ol>
+    )
+}
 export default ListContacts
