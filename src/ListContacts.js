@@ -207,8 +207,11 @@ updateQuery = (query) => {
 }
 
 render() {
+   const { contacts, onDeleteContact } = this.props
+   const { query } = this.state
+
    let showingContacts;
-   if(this.state.query) {
+   if(query) {
      const match = new RegExp(escapeRegExp(this.state.query), "i")
      showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
    } else {
