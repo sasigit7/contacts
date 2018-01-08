@@ -183,7 +183,15 @@ ListContacts.propTypes = {
 };
 export default ListContacts;
 */
-//7. CONTROLLED COMPONENTS::
+/* 7. CONTROLLED COMPONENTS:::::
+->Controlled Components are components which render a form, but the source of
+truth for that form state lives inside of the component state rather than inside
+of the DOM.
+Benefits::->
+a) Instant Input Validation
+b) Conditionally disable/enable buttons
+c) Enforce input formats
+*/
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import escapeRegExp from "escape-string-regexp"
