@@ -204,7 +204,7 @@ updateQuery = (query) => {
   this.setState({
     query: trimmedQuery
   })
-
+}
 
 clearQuery = () => {
   this.updateQuery("")
@@ -243,9 +243,7 @@ showingContacts.sort(sortBy("name"))
         </div>
       )}
 
-
-
-      <ol className="contact-list">
+    <ol className="contact-list">
         {showingContacts.map((contact) => (
           <li key={contact.id} className="contact-list-item">
             <div
