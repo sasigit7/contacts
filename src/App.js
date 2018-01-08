@@ -241,7 +241,12 @@ export default App
 */
 
 //LESSON 4: RENDER UI WITH EXTERNAL DATA::::
-// USING componentDidMount LIFECYCLE EVENT TO FETCH EXTERNAL DATA:
+/*
+ USING componentDidMount LIFECYCLE EVENT TO FETCH EXTERNAL DATA:
+->componentDidMount invoked immediately after the component is inserted into
+the DOM. To dynamically fetch data or run an Ajax request, we should do it in
+componentDidMount() life cycle event.
+*/
 /*
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
@@ -281,6 +286,7 @@ class App extends Component {
 export default App;
 */
 // REMOVE CONTACTS:
+/*
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
 import * as ContactsAPI from './utils/ContactsAPI';
@@ -312,6 +318,51 @@ class App extends Component {
           onDeleteContact={this.removeContact}
           contacts={this.state.contacts} />
       </div>
+    );
+  }
+}
+
+export default App;
+*/
+//STATE-BASED CONTENT RENDERING::
+import React, { Component } from 'react';
+import ListContacts from './ListContacts';
+import CreateContact from './CreateContact';
+import * as ContactsAPI from './utils/ContactsAPI';
+
+class App extends Component {
+  state = {
+    screen: 'create', // list, create
+    contacts: []
+  };
+
+  componentDidMount() {
+    ContactsAPI.getAll().then((contacts) => {
+      this.setState({ contacts }) // this.setState({ contacts: contacts })
+    })
+  }
+   removeContact = (contact) => {
+       // FIRST WAY - REFER ABOVE 2.a
+       this.setState((state) => ({
+           contacts: state.contacts.filter((c) => c.id !== contact.id)
+       }))
+
+       ContactsAPI.remove(contact)
+       //SECOND WAY - REFER ABOVE 2.b
+      //  this.setState({})
+}
+  render() {
+    return (
+      <div className='app'>
+        {this.state.screen === 'list' && (
+          <ListContacts
+            onDeleteContact={this.removeContact}
+            contacts={this.state.contacts} />
+          )}
+          {this.state.screen === 'create' && (
+            <CreateContact />
+          )}
+       </div>
     );
   }
 }
