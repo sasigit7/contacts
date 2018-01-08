@@ -332,7 +332,7 @@ import * as ContactsAPI from './utils/ContactsAPI';
 
 class App extends Component {
   state = {
-    screen: 'create', // list, create
+    screen: 'list', // list, create
     contacts: []
   };
 
@@ -354,10 +354,18 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        {this.state.screen === 'list' && (
+
+        {this.state.screen === 'list' && ( /* Using JS technigue called
+          SHORT-CIRCUIT EVALUATION (EXPRESSION && EXPRESSION). IF THE FIRST
+          EXPRESSION EVALUATES TO TRUE, THEN THE SECOND EXPRESSION IS RUN.
+          */
           <ListContacts
             onDeleteContact={this.removeContact}
-            contacts={this.state.contacts} />
+            contacts={this.state.contacts}
+            onNavigate={() => {
+              this.setState({ screen: 'create' })
+            }}
+          />
           )}
           {this.state.screen === 'create' && (
             <CreateContact />
