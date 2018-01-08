@@ -240,8 +240,9 @@ class App extends Component {
 export default App
 */
 
-// RENDER UI WITH EXTERNAL DATA::::
-
+//LESSON 4: RENDER UI WITH EXTERNAL DATA::::
+// USING componentDidMount LIFECYCLE EVENT TO FETCH EXTERNAL DATA:
+/*
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
 import * as ContactsAPI from './utils/ContactsAPI';
@@ -265,6 +266,44 @@ class App extends Component {
         this.setState({
 
        })
+}
+  render() {
+    return (
+      <div>
+        <ListContacts
+          onDeleteContact={this.removeContact}
+          contacts={this.state.contacts} />
+      </div>
+    );
+  }
+}
+
+export default App;
+*/
+// REMOVE CONTACTS:
+import React, { Component } from 'react';
+import ListContacts from './ListContacts';
+import * as ContactsAPI from './utils/ContactsAPI';
+
+class App extends Component {
+  state = {
+    contacts: []
+  };
+
+  componentDidMount() {
+    ContactsAPI.getAll().then((contacts) => {
+      this.setState({ contacts }) // this.setState({ contacts: contacts })
+    })
+  }
+   removeContact = (contact) => {
+       // FIRST WAY - REFER ABOVE 2.a
+       this.setState((state) => ({
+           contacts: state.contacts.filter((c) => c.id !== contact.id)
+       }))
+
+       ContactsAPI.remove(contact)
+       //SECOND WAY - REFER ABOVE 2.b
+      //  this.setState({})
 }
   render() {
     return (
