@@ -325,6 +325,7 @@ class App extends Component {
 export default App;
 */
 //STATE-BASED CONTENT RENDERING::
+/*
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
 import CreateContact from './CreateContact';
@@ -358,7 +359,7 @@ class App extends Component {
         {this.state.screen === 'list' && ( /* Using JS technigue called
           SHORT-CIRCUIT EVALUATION (EXPRESSION && EXPRESSION). IF THE FIRST
           EXPRESSION EVALUATES TO TRUE, THEN THE SECOND EXPRESSION IS RUN.
-          */
+
           <ListContacts
             onDeleteContact={this.removeContact}
             contacts={this.state.contacts}
@@ -370,6 +371,51 @@ class App extends Component {
           {this.state.screen === 'create' && (
             <CreateContact />
           )}
+       </div>
+    );
+  }
+}
+
+export default App;
+*/
+
+//ADD ROUTES TO THE APP::
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import ListContacts from './ListContacts';
+import CreateContact from './CreateContact';
+import * as ContactsAPI from './utils/ContactsAPI';
+
+class App extends Component {
+  state = {
+    contacts: []
+  };
+
+  componentDidMount() {
+    ContactsAPI.getAll().then((contacts) => {
+      this.setState({ contacts }) // this.setState({ contacts: contacts })
+    })
+  }
+   removeContact = (contact) => {
+       // FIRST WAY - REFER ABOVE 2.a
+       this.setState((state) => ({
+           contacts: state.contacts.filter((c) => c.id !== contact.id)
+       }))
+
+       ContactsAPI.remove(contact)
+       //SECOND WAY - REFER ABOVE 2.b
+      //  this.setState({})
+}
+  render() {
+    return (
+      <div className='app'>
+         <Route exact path ='/' render={() => (
+           <ListContacts
+             contacts={this.state.contacts}
+             onDeleteContact={this.removeContact}
+            />
+         )}/>
+         <Route path='/create' component={CreateContact}/>
        </div>
     );
   }
